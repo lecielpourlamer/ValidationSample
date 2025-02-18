@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>입력 화면</title>
+	<title th:text="#{title.entry}">입력 화면</title>
 </head>
 <body>
 	<form th:action="@{/calc}" method="post" th:object="${calcForm}">
@@ -11,7 +11,8 @@
 			+
 			<input type="text" th:field="*{rightNum}">
 		</div>
-		<input type="submit" value="계산">
+		<!--<input type="submit" value="계산">-->
+		<button type="submit" th:text="#{button.send}"></button>
 
 		<!-- 에러 표시 -->
 		<ul th:if="${#fields.hasErrors('*')}">

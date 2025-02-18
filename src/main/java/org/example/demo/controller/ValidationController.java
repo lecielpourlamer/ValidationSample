@@ -1,11 +1,15 @@
 package org.example.demo.controller;
 
 import org.example.demo.form.CalcForm;
+import org.example.demo.validator.CalcValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -18,6 +22,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ValidationController {
+
+    /** 주입(인젝션) */
+    @Autowired
+    CalcValidator calcValidator;
+
+    /** 커스텀 유효성 검사기 등록 */
+    @InitBinder("calcForm")
+    public void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(calcValidator);
+    }
 
     /** form-backing bean 초기화 */
     @ModelAttribute
